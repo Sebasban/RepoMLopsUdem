@@ -19,4 +19,4 @@ COPY [ "predict_mlflow.py", "model.pkl", "./" ]
 EXPOSE 9696
 
 # Ejecutar la aplicación con gunicorn
-ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "predict:app" ]
+ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "predict_mlflow:app" ]
