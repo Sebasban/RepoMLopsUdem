@@ -36,10 +36,16 @@ class PipelineCleanNumeric(BaseEstimator, TransformerMixin):
             df["has_capital_gain"] = (df["capital_gain"].fillna(0) > 0).astype("Int8")
             df["has_capital_loss"] = (df["capital_loss"].fillna(0) > 0).astype("Int8")
 
-        # 5) Columnas redundantes
+        # 5) Columnas redundantes y no deseadas
         drop_cols = []
         if "education" in df.columns and "education_num" in df.columns:
             drop_cols.append("education")
+        
+        # Eliminar columnas específicas
+        for col in ["fnlwgt", "race", "sex"]:
+            if col in df.columns:
+                drop_cols.append(col)
+        
         if drop_cols:
             df.drop(columns=drop_cols, inplace=True)
 
